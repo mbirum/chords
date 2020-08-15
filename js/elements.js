@@ -13,26 +13,13 @@ function getLayerItemHTML(increment) {
 }
 
 function setLayerSize(layer) {
-    let toolbar = $('#toolbar');
-    let toolbarBottom = toolbar.position().top + toolbar.outerHeight(true);
-    layer.width = 1400;
-    layer.height = 700;
-    layer.top = toolbarBottom;
-    layer.left = toolbar.position().left;
-    $(layer).width('50%');
-
-    let iconId = 'icon' + layers.length;
-    let icon = document.getElementById(iconId);
-    icon.width = 1400;
-    icon.height = 700;
-    icon.top = 10;
-    icon.left = $(icon).parent().position().left + 45;
-    $(icon).width('250');
-    $(icon).height('170');
+    layer.width = 4000;
+    layer.height = 2000;
+    layer.top = 0;
+    layer.left = 0;
+    $(layer).width('75%');
 }
 
 function setSliderSize(slider) {
-    let canvas = $('.layer').first();
-    let handle = $('#slider-handle');
-    $(slider).width(canvas.width() - handle.width() - 20);
+
 }

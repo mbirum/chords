@@ -5,6 +5,11 @@ var isDrawing = false;
 var layers = [];
 var activeLayer;
 var barres = [];
+var isBarring = false;
+var barreFromTo = {
+    from: null,
+    to: null
+};
 
 function load() {
     let loader = new app.ScriptLoader;
@@ -17,13 +22,13 @@ function load() {
     loader.load('js/layer.js', function() {
         events();
         createNewLayer();
-        activeLayer.drawImage(document.getElementById("guitar"), 0, 0, 1400, 700);
-        drawCoreNotes();
+        activeLayer.drawImage(document.getElementById("guitar"), 0, 0, 4000, 2000);
+        //drawCoreNotes();
     });
 }
 
 function drawCoreNotes() {
-    let f1 = new app.Barre(115,488);
+    let f1 = new app.Barre(113,488);
     f1.addNote(new app.Note(0,0,'white'));
     barres.push(f1);
 
@@ -116,10 +121,23 @@ function createNewLayer() {
 function getPosition(layer, evt) {
     let rect = layer.getBoundingClientRect(), 
         scaleX = layer.width / rect.width,    
-        scaleY = layer.height / rect.height;  
+        scaleY = layer.height / rect.height;
+    let rwidth = Math.floor(rect.width);
+    let rheight = Math.floor(rect.height);
+    let rleft = Math.floor(rect.left);
+    let rtop = Math.floor(rect.top);
+    // console.log(`layer.width: ${layer.width}`);
+    // console.log(`layer.height: ${layer.height}`);
+    // console.log(`rect.width: ${rwidth}`);
+    // console.log(`rect.height: ${rheight}`);
+    // console.log(`rect.left: ${rleft}`);
+    // console.log(`rect.top: ${rtop}`);
+    // console.log(`clientX,Y: ${evt.clientX}, ${evt.clientY}`);
+    // console.log(`scaledX,Y: ${Math.floor((evt.clientX - rect.left) * scaleX) - 16}, ${Math.floor((evt.clientY - rect.top) * scaleY)}`);
+    // console.log(``);
     return {
-    x: (evt.clientX - rect.left) * scaleX,   
-    y: (evt.clientY - rect.top) * scaleY     
+        x: Math.floor((evt.clientX - rect.left) * scaleX),   
+        y: Math.floor((evt.clientY - rect.top) * scaleY)
     }
 }
 
@@ -147,29 +165,36 @@ function layerEvents() {
     $(document).on('mouseleave', '.layer', function (e) {
         activeLayer.closePath();
     });
+    $(document).on('mousemove', '.layer', function(e) {
+        getPosition(e.target, e);
+    });
 }
 
 
 function events() {
     layerEvents();
 
-    $(document).mousedown(function(e) {
-        isDrawing = true;
+    $(document).keydown(function(e) {
+        if (e.keyCode == 66) {
+            isBarring = true;
+        }
+    }).keyup(function() {
+        isBarring = false;
     });
 
     $(document).mouseup(function(e) {
-        isDrawing = false;
-    });
-
-    $(document).mousemove(function(e) {
-        if (isDrawing && isActiveLayer(e.target)) {
-            let context = buildContext(getPosition(e.target, e));
-            activeLayer.draw(context);
+        if (isBarring) {
+            if (null == barreFromTo.from && null == barreFromTo.to) {
+                barreFromTo.from = getPosition(e.target, e);
+            }
+            else if (null == barreFromTo.to) {
+                barreFromTo.to = getPosition(e.target, e);
+                activeLayer.drawLine(barreFromTo.from, barreFromTo.to);
+                activeLayer.closePath();
+                barreFromTo.from = null;
+                barreFromTo.to = null;
+            }
         }
-    });
-
-    $(window).resize(function () {
-        setSliderSize($('#slider'));
     });
 }
 

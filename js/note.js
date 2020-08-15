@@ -1,6 +1,6 @@
 window.app = window.app || { };
 
-app.Note = function(xoff, yoff, f) {
+app.Note = function(xoff, yoff, f = null) {
     var fill = f;
     var xOffset = xoff;
     var yOffset = yoff;

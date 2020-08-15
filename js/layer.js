@@ -24,6 +24,14 @@ app.Layer = function() {
         canvas.stroke();
     }
 
+    function drawLine(from, to) {
+        canvas.beginPath();
+        canvas.moveTo(from.x, from.y);
+        canvas.lineTo(to.x, to.y);
+        canvas.lineWidth = 5;
+        canvas.stroke();
+    }
+
     function drawBarre(barre) {
         let core = barre.getCoreNote();
         let notes = barre.getNotes();
@@ -38,8 +46,10 @@ app.Layer = function() {
     function drawCircle(x, y, style) {
         canvas.beginPath();
         canvas.arc(x, y, 3, 0, 2 * Math.PI, false);
-        canvas.fillStyle = style;
-        canvas.fill();
+        if (null != style) {
+            canvas.fillStyle = style;
+            canvas.fill();
+        }
         canvas.stroke();
     }
 
@@ -72,6 +82,7 @@ app.Layer = function() {
         closePath,
         draw,
         drawCircle,
+        drawLine,
         getId,
         clear,
         getDataURL,
