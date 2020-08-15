@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <title>Sketch</title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="lib/jquery-ui-1.12.1/jquery-ui.min.css">
+        <link rel="stylesheet" href="lib/bootstrap.min.css">
+        <link rel="stylesheet" href="style.css">
+
+        <script src="lib/jquery-2.1.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="lib/bootstrap.min.js" ></script>
+        <script src="js/load.js" ></script>
+        <script src="js/chords.js" ></script>
+    </head>
+
+    <body id="content" class="container">
+
+        <div id="toolbar" class="row">
+            <div class="col-sm-2"></div>
+            <div class="btn btn-default btn-toolbar btn-play state-play col-sm-1">Play</div>
+            <div class="btn btn-default btn-toolbar btn-reset col-sm-1">Reset</div>
+            <div class="col-sm-2">
+                <div class="btn-group" data-toggle="buttons">
+					<label id="btn-speed-half" class="btn btn-default btn-speed">
+						<input name="speed" type="radio">1/2x
+					</label>
+					<label id="btn-speed-one" class="btn btn-default btn-speed active">
+						<input name="speed" type="radio">1x
+					</label>
+					<label id="btn-speed-two" class="btn btn-default btn-speed">
+						<input name="speed" type="radio">2x
+                    </label>
+                    <label id="btn-speed-four" class="btn btn-default btn-speed">
+						<input name="speed" type="radio">4x
+					</label>
+				</div>
+            </div>
+            <div class="lbl col-sm-1">
+                <span>Layer <span id="layer-label">1</span></span>
+            </div>
+            <div class="btn btn-default btn-toolbar btn-save col-sm-1">(+) New Layer</div>
+            <div class="btn btn-default btn-toolbar btn-clear col-sm-1">Clear Layer</div>
+            <div class="btn btn-default btn-toolbar btn-start-over col-sm-1">Start Over</div>
+            
+        </div>
+        
+        <div class="row">
+            <div id="slider" class="col-sm-12">
+                <div id="slider-handle" class="ui-slider-handle"></div>
+            </div>
+        </div>
+
+        <div id="layers" class="row"></div>
+
+        <div id="nav-wrapper" class="row">
+            <nav id="sidebar">
+                <ul id="layer-list" class="list-unstyled components"></ul>
+            </nav>
+        </div>
+
+    </body>
+
+</html>
