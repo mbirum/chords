@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Sketch</title>
+        <title>Chords</title>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,39 +18,10 @@
 
     <body id="content" class="container">
 
+        <img id="guitar" src="lib/guitar-empty.JPG" style="display:none">
+
         <div id="toolbar" class="row">
             <div class="col-sm-2"></div>
-            <div class="btn btn-default btn-toolbar btn-play state-play col-sm-1">Play</div>
-            <div class="btn btn-default btn-toolbar btn-reset col-sm-1">Reset</div>
-            <div class="col-sm-2">
-                <div class="btn-group" data-toggle="buttons">
-					<label id="btn-speed-half" class="btn btn-default btn-speed">
-						<input name="speed" type="radio">1/2x
-					</label>
-					<label id="btn-speed-one" class="btn btn-default btn-speed active">
-						<input name="speed" type="radio">1x
-					</label>
-					<label id="btn-speed-two" class="btn btn-default btn-speed">
-						<input name="speed" type="radio">2x
-                    </label>
-                    <label id="btn-speed-four" class="btn btn-default btn-speed">
-						<input name="speed" type="radio">4x
-					</label>
-				</div>
-            </div>
-            <div class="lbl col-sm-1">
-                <span>Layer <span id="layer-label">1</span></span>
-            </div>
-            <div class="btn btn-default btn-toolbar btn-save col-sm-1">(+) New Layer</div>
-            <div class="btn btn-default btn-toolbar btn-clear col-sm-1">Clear Layer</div>
-            <div class="btn btn-default btn-toolbar btn-start-over col-sm-1">Start Over</div>
-            
-        </div>
-        
-        <div class="row">
-            <div id="slider" class="col-sm-12">
-                <div id="slider-handle" class="ui-slider-handle"></div>
-            </div>
         </div>
 
         <div id="layers" class="row"></div>
