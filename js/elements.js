@@ -17,7 +17,7 @@ function setLayerSize(layer) {
     layer.height = 2000;
     layer.top = 0;
     layer.left = 0;
-    $(layer).width('75%');
+    $(layer).width('90%');
 }
 
 function setSliderSize(slider) {
