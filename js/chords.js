@@ -15,87 +15,43 @@ function load() {
     let loader = new app.ScriptLoader;
 
     loader.load('js/elements.js');
-    loader.load('js/context.js');
     loader.load('js/note.js');
     loader.load('js/barre.js');
-
     loader.load('js/layer.js', function() {
         events();
         createNewLayer();
         activeLayer.drawImage(document.getElementById("guitar"), 0, 0, 4000, 2000);
-        //drawCoreNotes();
+        drawBarres();
     });
 }
 
-function drawCoreNotes() {
-    let f1 = new app.Barre(113,488);
-    f1.addNote(new app.Note(0,0,'white'));
-    barres.push(f1);
-
-    let f2 = new app.Barre(220,492);
-    f2.addNote(new app.Note(0,0,'white'));
-    barres.push(f2);
-
-    let f3 = new app.Barre(322,494);
-    f3.addNote(new app.Note(0,0,'white'));
-    barres.push(f3);
-    
-    let f4 = new app.Barre(420,497);
-    f4.addNote(new app.Note(0,0,'white'));
-    barres.push(f4);
-    
-    let f5 = new app.Barre(518,498);
-    f5.addNote(new app.Note(0,0,'white'));
-    barres.push(f5);
-    
-    let f6 = new app.Barre(610,501);
-    f6.addNote(new app.Note(0,0,'white'));
-    barres.push(f6);
-    
-    let f7 = new app.Barre(700,502);
-    f7.addNote(new app.Note(0,0,'white'));
-    barres.push(f7);
-    
-    let f8 = new app.Barre(788,503);
-    f8.addNote(new app.Note(0,0,'white'));
-    barres.push(f8);
-    
-    let f9 = new app.Barre(872,504);
-    f9.addNote(new app.Note(0,0,'white'));
-    barres.push(f9);
-    
-    let f10 = new app.Barre(952,506);
-    f10.addNote(new app.Note(0,0,'white'));
-    barres.push(f10);
-    
-    let f11 = new app.Barre(1028,507);
-    f11.addNote(new app.Note(0,0,'white'));
-    barres.push(f11);
-    
-    let f12 = new app.Barre(1102,509);
-    f12.addNote(new app.Note(0,0,'white'));
-    barres.push(f12);
-    
-    let f13 = new app.Barre(1173,510);
-    f13.addNote(new app.Note(0,0,'white'));
-    barres.push(f13);
-    
-    let f14 = new app.Barre(1240,511);
-    f14.addNote(new app.Note(0,0,'white'));
-    barres.push(f14);
-    
-    let f15 = new app.Barre(1304,512);
-    f15.addNote(new app.Note(0,0,'white'));
-    barres.push(f15);
-    
-    let f16 = new app.Barre(1367,513);
-    f16.addNote(new app.Note(0,0,'white'));
-    barres.push(f16);
-    
-    barres.forEach(function(barre) {
-        activeLayer.drawBarre(barre);
-    })
+function drawBarres() {
+    barres.push(new app.Barre({x:236,y:1439}, {x:421, y:1361}));
+    barres.push(new app.Barre({x:532,y:1446}, {x:724, y:1365}));
+    barres.push(new app.Barre({x:835,y:1450}, {x:990, y:1369}));
+    barres.push(new app.Barre({x:1134,y:1457}, {x:1279, y:1383}));
+    barres.push(new app.Barre({x:1415,y:1476}, {x:1541, y:1387}));
+    barres.push(new app.Barre({x:1693,y:1479}, {x:1804, y:1383}));
+    barres.push(new app.Barre({x:1959,y:1483}, {x:2051, y:1387}));
+    barres.push(new app.Barre({x:2207,y:1490}, {x:2295, y:1391}));
+    barres.push(new app.Barre({x:2465,y:1498}, {x:2521, y:1391}));
+    barres.push(new app.Barre({x:2702,y:1498}, {x:2739, y:1402}));
+    barres.push(new app.Barre({x:2931,y:1505}, {x:2953, y:1409}));
+    barres.push(new app.Barre({x:3157,y:1516}, {x:3149, y:1402}));
+    barres.push(new app.Barre({x:3364,y:1516}, {x:3341, y:1409}));
+    barres.push(new app.Barre({x:3563,y:1527}, {x:3526, y:1416}));
+    barres.push(new app.Barre({x:3763,y:1531}, {x:3696, y:1420}));
+    barres.push(new app.Barre({x:3940,y:1531}, {x:3859, y:1413}));
+    barres.forEach(function(b) {
+        activeLayer.drawBarre(b);
+    });
 }
+
+// function drawCoreNotes() {
+    // let f1 = new app.Barre(113,488);
+    // f1.addNote(new app.Note(0,0,'white'));
+    // barres.push(f1);
+// }
 
 function createNewLayer() {
     layers.push(new app.Layer);
@@ -122,19 +78,6 @@ function getPosition(layer, evt) {
     let rect = layer.getBoundingClientRect(), 
         scaleX = layer.width / rect.width,    
         scaleY = layer.height / rect.height;
-    let rwidth = Math.floor(rect.width);
-    let rheight = Math.floor(rect.height);
-    let rleft = Math.floor(rect.left);
-    let rtop = Math.floor(rect.top);
-    // console.log(`layer.width: ${layer.width}`);
-    // console.log(`layer.height: ${layer.height}`);
-    // console.log(`rect.width: ${rwidth}`);
-    // console.log(`rect.height: ${rheight}`);
-    // console.log(`rect.left: ${rleft}`);
-    // console.log(`rect.top: ${rtop}`);
-    // console.log(`clientX,Y: ${evt.clientX}, ${evt.clientY}`);
-    // console.log(`scaledX,Y: ${Math.floor((evt.clientX - rect.left) * scaleX) - 16}, ${Math.floor((evt.clientY - rect.top) * scaleY)}`);
-    // console.log(``);
     return {
         x: Math.floor((evt.clientX - rect.left) * scaleX),   
         y: Math.floor((evt.clientY - rect.top) * scaleY)
@@ -145,28 +88,10 @@ function isActiveLayer(layer) {
     return activeLayer.getId() === layer.id;
 }
 
-function buildContext() {
-    return buildContext(null);
-}
-
-function buildContext(cursor) {
-    return new app.Context(cursor);
-}
-
 function layerEvents() {
-    $(document).on('mouseenter', '.layer', function (e) {
-        activeLayer.beginPath(buildContext());
-    });
 
-    $(document).on('mouseup', '.layer', function (e) {
-        activeLayer.beginPath(buildContext());
-    });
-
-    $(document).on('mouseleave', '.layer', function (e) {
-        activeLayer.closePath();
-    });
     $(document).on('mousemove', '.layer', function(e) {
-        getPosition(e.target, e);
+        // getPosition(e.target, e);
     });
 }
 
@@ -191,6 +116,10 @@ function events() {
                 barreFromTo.to = getPosition(e.target, e);
                 activeLayer.drawLine(barreFromTo.from, barreFromTo.to);
                 activeLayer.closePath();
+                let b = new app.Barre(barreFromTo.from, barreFromTo.to);
+                barres.push(b);
+                console.log(`New Barre! From ${barreFromTo.from.x},${barreFromTo.from.y}, {x:${barreFromTo.to.x}, ${barreFromTo.to.y}`);
+                activeLayer.drawBarre(b);
                 barreFromTo.from = null;
                 barreFromTo.to = null;
             }
@@ -201,3 +130,13 @@ function events() {
 $(document).ready(function(e) {
     load();
 });
+
+
+
+
+
+
+
+
+
+

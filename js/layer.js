@@ -33,19 +33,33 @@ app.Layer = function() {
     }
 
     function drawBarre(barre) {
-        let core = barre.getCoreNote();
-        let notes = barre.getNotes();
-        for (let i = 0; i < notes.length; i++) {
-            let x = core.x + notes[i].getXOffset();
-            let y = core.y + notes[i].getYOffset();
-            let fill = notes[i].getFill();
-            drawCircle(x, y, fill);
+        canvas.lineWidth = 2;
+        let from = barre.getFrom();
+        let to = barre.getTo();
+
+        let leftOffset = -12;
+        let topOffset = -15;
+
+        let xDiff = to.x - from.x;
+        let increment = xDiff / 6;
+
+        let relativeX = to.x - from.x;
+        let relativeY = Math.abs(to.y - from.y);
+
+        let k = relativeY / relativeX;
+
+        for (let i = 0; i < 6; i++) {
+            let x = (from.x + (i * increment));
+            let newRelativeX = x - from.x;
+            let newRelativeY = k * newRelativeX;
+            let y = Math.abs(newRelativeY - from.y)
+            drawCircle(x + leftOffset, y + topOffset);
         }
     }
 
-    function drawCircle(x, y, style) {
+    function drawCircle(x, y, style = null) {
         canvas.beginPath();
-        canvas.arc(x, y, 3, 0, 2 * Math.PI, false);
+        canvas.arc(x, y, 12, 0, 2 * Math.PI, false);
         if (null != style) {
             canvas.fillStyle = style;
             canvas.fill();

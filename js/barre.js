@@ -1,12 +1,16 @@
 window.app = window.app || { };
 
-// Group of Notes
-app.Barre = function(x, y) {
-    var coreNote = {x, y};
-    var notes = [];
+app.Barre = function(f, t) {
+    let from = f;
+    let to = t;
+    let notes = [];
 
-    function getCoreNote() {
-        return coreNote;
+    function getFrom() {
+        return from;
+    }
+
+    function getTo() {
+        return to;
     }
 
     function getNotes() {
@@ -18,7 +22,8 @@ app.Barre = function(x, y) {
     }
 
     return {
-        getCoreNote,
+        getFrom,
+        getTo,
         getNotes,
         addNote
     }
