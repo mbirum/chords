@@ -18,8 +18,8 @@ function setLayerSize(layer) {
     layer.top = 0;
     layer.left = 0;
     $(layer).width('97%');
+    let top = layer.getBoundingClientRect().height;
+    $('#form').css('top',`${top}px`);
 }
 
-function setSliderSize(slider) {
 
-}

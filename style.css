@@ -2,6 +2,7 @@
     width: 98%;
     height: 98%;
     user-select: none;
+    display:flex;
 }
 
 .canvas,
@@ -30,4 +31,14 @@ a.ui-button:active,
 
 .col-xs-12 {
     padding:0;
+}
+
+#form {
+    position:absolute;
+    margin-top:10px;
+}
+
+input {
+    margin-top:5px;
+    margin-bottom:5px;
 }

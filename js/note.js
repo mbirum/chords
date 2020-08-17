@@ -5,6 +5,7 @@ app.Note = function(xc, yc, f = null) {
     var x = xc;
     var y = yc;
     var radius = 12;
+    var filled = false;
 
     function getFill() {
         return fill;
@@ -16,6 +17,14 @@ app.Note = function(xc, yc, f = null) {
 
     function getY() {
         return y;
+    }
+
+    function setFilled() {
+        filled = true;
+    }
+
+    function isFilled() {
+        return filled;
     }
 
     function isTouched(cursor) {
@@ -59,6 +68,8 @@ app.Note = function(xc, yc, f = null) {
         getX,
         getY,
         isTouched,
-        getRadius
+        getRadius,
+        setFilled,
+        isFilled
     }
 };
