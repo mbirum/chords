@@ -15,7 +15,6 @@ function load() {
     let loader = new app.ScriptLoader;
 
     loader.load('js/elements.js');
-    loader.load('js/circle.js');
     loader.load('js/note.js');
     loader.load('js/barre.js');
     loader.load('js/layer.js', function() {

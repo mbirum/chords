@@ -40,6 +40,7 @@ app.Layer = function() {
     function drawCircle(x, y, r, style = null) {
         canvas.beginPath();
         canvas.lineWidth = 2;
+        canvas.strokeStyle = 'white';
         canvas.arc(x, y, r, 0, 2 * Math.PI, false);
         if (null != style) {
             canvas.fillStyle = style;
