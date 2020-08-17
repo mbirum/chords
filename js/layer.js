@@ -18,10 +18,8 @@ app.Layer = function() {
         canvas.closePath();
     }
 
-    function drawCoordinate(x, y) {
-        canvas.lineTo(x,y);
-        canvas.moveTo(x,y);
-        canvas.stroke();
+    function drawImage(img,x,y,w,h) {
+        canvas.drawImage(img, x, y, w, h);
     }
 
     function drawLine(from, to) {
@@ -33,74 +31,30 @@ app.Layer = function() {
     }
 
     function drawBarre(barre) {
-        canvas.lineWidth = 2;
-        let from = barre.getFrom();
-        let to = barre.getTo();
-
-        let leftOffset = -12;
-        let topOffset = -15;
-
-        let xDiff = to.x - from.x;
-        let increment = xDiff / 6;
-
-        let relativeX = to.x - from.x;
-        let relativeY = Math.abs(to.y - from.y);
-
-        let k = relativeY / relativeX;
-
-        for (let i = 0; i < 6; i++) {
-            let x = (from.x + (i * increment));
-            let newRelativeX = x - from.x;
-            let newRelativeY = k * newRelativeX;
-            let y = Math.abs(newRelativeY - from.y)
-            drawCircle(x + leftOffset, y + topOffset);
+        let notes = barre.getNotes();
+        for (let i = 0; i < notes.length; i++) {
+            drawCircle(notes[i].getX(), notes[i].getY(), notes[i].getRadius());
         }
     }
 
-    function drawCircle(x, y, style = null) {
+    function drawCircle(x, y, r, style = null) {
         canvas.beginPath();
-        canvas.arc(x, y, 12, 0, 2 * Math.PI, false);
+        canvas.lineWidth = 2;
+        canvas.arc(x, y, r, 0, 2 * Math.PI, false);
         if (null != style) {
             canvas.fillStyle = style;
             canvas.fill();
         }
         canvas.stroke();
     }
-
-    function drawImage(img,x,y,w,h) {
-        canvas.drawImage(img, x, y, w, h);
-    }
-
-    function draw(context) {
-        let cursor = context.getCursor();
-        drawCoordinate(cursor.x,cursor.y);
-        cursor.time = Date.now();
-    }
-
-    function getId() {
-        return elementId;
-    }
-
-    function clear() {
-        let element = document.getElementById(elementId);
-        canvas.clearRect(0, 0, element.width, element.height);
-    }
-
-    function getDataURL() {
-        return document.getElementById(elementId).toDataURL();
-    }
    
     return {
         initialize,
         beginPath,
         closePath,
-        draw,
-        drawCircle,
-        drawLine,
-        getId,
-        clear,
-        getDataURL,
         drawImage,
-        drawBarre
+        drawLine,
+        drawBarre,
+        drawCircle
     }
 };

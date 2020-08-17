@@ -15,6 +15,7 @@ function load() {
     let loader = new app.ScriptLoader;
 
     loader.load('js/elements.js');
+    loader.load('js/circle.js');
     loader.load('js/note.js');
     loader.load('js/barre.js');
     loader.load('js/layer.js', function() {
@@ -47,12 +48,6 @@ function drawBarres() {
     });
 }
 
-// function drawCoreNotes() {
-    // let f1 = new app.Barre(113,488);
-    // f1.addNote(new app.Note(0,0,'white'));
-    // barres.push(f1);
-// }
-
 function createNewLayer() {
     layers.push(new app.Layer);
 
@@ -84,14 +79,15 @@ function getPosition(layer, evt) {
     }
 }
 
-function isActiveLayer(layer) {
-    return activeLayer.getId() === layer.id;
-}
-
 function layerEvents() {
-
-    $(document).on('mousemove', '.layer', function(e) {
-        // getPosition(e.target, e);
+    $(document).on('mousedown', '.layer', function(e) {
+        barres.forEach(function(barre) {
+            barre.getNotes().forEach(function(note) {
+                if (note.isTouched(getPosition(e.target, e))) {
+                    activeLayer.drawCircle(note.getX(),note.getY(),note.getRadius(),'red');
+                }
+            });
+        });
     });
 }
 

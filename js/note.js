@@ -1,25 +1,64 @@
 window.app = window.app || { };
 
-app.Note = function(xoff, yoff, f = null) {
+app.Note = function(xc, yc, f = null) {
     var fill = f;
-    var xOffset = xoff;
-    var yOffset = yoff;
+    var x = xc;
+    var y = yc;
+    var radius = 12;
 
     function getFill() {
         return fill;
     }
 
-    function getXOffset() {
-        return xOffset;
+    function getX() {
+        return x;
     }
 
-    function getYOffset() {
-        return yOffset;
+    function getY() {
+        return y;
+    }
+
+    function isTouched(cursor) {
+        let isBetweenX = false;
+        let isBetweenY = false;
+        
+        let isLessThanX = false;
+        let isGreaterThanX = false;
+        let isLessThanY = false;
+        let isGreaterThanY = false;
+
+        if (cursor.x >= (x-radius)) {
+            isGreaterThanX = true;
+        }
+        if (cursor.x <= (x+radius)) {
+            isLessThanX = true;
+        }
+        if (cursor.y >= (y-radius)) {
+            isGreaterThanY = true;
+        }
+        if (cursor.y <= (y+radius)) {
+            isLessThanY = true;
+        }
+        
+        if (isLessThanX && isGreaterThanX) {
+            isBetweenX = true;
+        }
+        if (isLessThanY && isGreaterThanY) {
+            isBetweenY = true;
+        }
+
+        return isBetweenX && isBetweenY;
+    }
+
+    function getRadius() {
+        return radius;
     }
 
     return {
         getFill,
-        getXOffset,
-        getYOffset
+        getX,
+        getY,
+        isTouched,
+        getRadius
     }
 };
