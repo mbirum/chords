@@ -48,6 +48,17 @@ app.Layer = function() {
         }
         canvas.stroke();
     }
+
+    function drawText(text, x, y) {
+        canvas.beginPath();
+        canvas.fillStyle = "black";
+        canvas.font = '280px Arial';
+        canvas.fillText(text, x, y);
+    }
+
+    function toURL() {
+        return document.getElementById(elementId).toDataURL('image/png');
+    }
    
     return {
         initialize,
@@ -56,6 +67,8 @@ app.Layer = function() {
         drawImage,
         drawLine,
         drawBarre,
-        drawCircle
+        drawCircle,
+        drawText,
+        toURL
     }
 };

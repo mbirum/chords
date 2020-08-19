@@ -23,6 +23,7 @@ function load() {
         createNewLayer();
         activeLayer.drawImage(document.getElementById("guitar"), 0, 0, 4000, 2000);
         drawBarres();
+        
     });
 }
 
@@ -124,9 +125,32 @@ function events() {
     });
 
     $('#form-submit').click(function(e) {
-        alert('submit');
-        // get all filled notes
+        let filledNotes = [];
+        barres.forEach(function(barre) {
+            barre.getNotes().forEach(function(note) {
+                if (note.isFilled()) {
+                    filledNotes.push({x:note.getX(),y:note.getY()});
+                }
+            });
+        });
+
+        let tags = $('#checkbox-group input:checkbox:checked').map(function() {
+            return $(this).next("label").text();
+        }).get();
+
+        let name = $("#name-input").val();
+        activeLayer.drawText(name, 600, 1175);
+
+        let chordJSON = {
+            name: name,
+            tags: tags,
+            notes: filledNotes
+        };
+
+        console.log(JSON.stringify(chordJSON));
     });
+
+    
 }
 
 $(document).ready(function(e) {
