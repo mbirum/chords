@@ -80,7 +80,8 @@ function getPosition(layer, evt) {
     }
 }
 
-function layerEvents() {
+function events() {
+
     $(document).on('mousedown', '.layer', function(e) {
         barres.forEach(function(barre) {
             barre.getNotes().forEach(function(note) {
@@ -91,11 +92,6 @@ function layerEvents() {
             });
         });
     });
-}
-
-
-function events() {
-    layerEvents();
 
     $(document).keydown(function(e) {
         if (e.keyCode == 66) {
@@ -148,6 +144,7 @@ function events() {
         };
 
         console.log(JSON.stringify(chordJSON));
+
     });
 
     

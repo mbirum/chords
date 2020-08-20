@@ -59,6 +59,10 @@ app.Layer = function() {
     function toURL() {
         return document.getElementById(elementId).toDataURL('image/png');
     }
+
+    function save() {
+        canvas.save();
+    }
    
     return {
         initialize,
@@ -69,6 +73,7 @@ app.Layer = function() {
         drawBarre,
         drawCircle,
         drawText,
-        toURL
+        toURL,
+        save
     }
 };
