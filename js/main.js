@@ -143,10 +143,14 @@ function events() {
             notes: filledNotes
         };
 
-        console.log(JSON.stringify(chordJSON));
-
+        
         document.getElementById('download').download = `${name}.png`;
         document.getElementById('download').href = activeLayer.toURL();
+
+        console.log(JSON.stringify(chordJSON));
+        let jsonData = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(chordJSON));
+        document.getElementById('download-json').download = `${name}.json`;
+        document.getElementById('download-json').href = jsonData;
     });
 
     
