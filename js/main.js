@@ -145,6 +145,8 @@ function events() {
 
         console.log(JSON.stringify(chordJSON));
 
+        document.getElementById('download').download = `${name}.png`;
+        document.getElementById('download').href = activeLayer.toURL();
     });
 
     
